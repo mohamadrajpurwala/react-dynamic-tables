@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Header/header';
+import Home from './pages/home';
+import ManageType from './pages/manageTypes';
+import NotFound from './pages/notFound';
+import CategoryType from './pages/type';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    
+    return (
+        <Router>
+            <Header />
+            <div className="container-fluid testimonial-group">
+                <Routes>
+                    <Route exact path="/" element={<Navigate to="/all" />} />
+                    <Route path='/all' element={<Home />} />
+                    <Route path='/manage-types' element={<ManageType />} />
+                    <Route path="/type/:id" element={<CategoryType />} />
+                    <Route path='*' exact={true} element={<NotFound />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
